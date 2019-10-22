@@ -10,6 +10,11 @@ namespace Supermercado5719_Biblioteca
         public int numCaja { get; set; }
         public List<Articulo> articulos { get; set; }
 
+        public Venta()
+        {
+            this.articulos = new List<Articulo>();
+        }
+
 
     }
 }
