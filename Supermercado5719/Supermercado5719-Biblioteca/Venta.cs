@@ -12,12 +12,9 @@ namespace Supermercado5719_Biblioteca
 
         public Venta()
         {
-            
+            ticket = new Ticket();
         }
 
-        public void crearTicket()
-        {
 
-        }
     }
 }

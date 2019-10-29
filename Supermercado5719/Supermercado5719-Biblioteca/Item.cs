@@ -4,11 +4,7 @@ using System.Text;
 
 namespace Supermercado5719_Biblioteca
 {
-    public class Item
+    class Item
     {
-        public int idItem { get; set; }
-        public int cantidad { get; set; }
-        public double precioSuptotal { get; set; }
-
     }
 }
