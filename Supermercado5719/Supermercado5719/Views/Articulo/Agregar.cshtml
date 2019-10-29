@@ -1,0 +1,37 @@
+﻿@model Supermercado5719.Models.Articulo
+<h1 class="display-4 mt-5">Nuevo articulo</h1>
+<form asp-controller="Articulo" asp-action="Agregar" method="post">
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="id">id del Articulo</label>
+            <input asp-for="id" type="text" placeholder="id" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label for="codigoBarra">Codigo de barra</label>
+            <input asp-for="codigoBarra" type="text" placeholder="codigoBarra" class="form-control" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="descripcion">Descripcion</label>
+            <input asp-for="descripcion" type="text" placeholder="descripcion" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label for="descripcionAbreviada">Descripcion Abreviada</label>
+            <input asp-for="descripcionAbreviada" type="text" placeholder="descripcionAbreviada" class="form-control" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="codigoInterno">Codigo Interno</label>
+            <input asp-for="codigoInterno" type="text" placeholder="codigoInterno" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label for="precio">precio</label>
+            <input asp-for="precio" type="text" placeholder="precio" class="form-control" />
+        </div>
+    </div>
+    <br />
+    <input type="submit" class="btn btn-outline-primary" value="Guardar" />
+    <a asp-controller="Empleado" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
+</form>
