@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using LiteDB;
 
 namespace Supermercado5719_Biblioteca
 {
@@ -13,7 +12,7 @@ namespace Supermercado5719_Biblioteca
 
         public Ticket()
         {
-
+            this.idTicket = idTicket;
         }
 
     }
