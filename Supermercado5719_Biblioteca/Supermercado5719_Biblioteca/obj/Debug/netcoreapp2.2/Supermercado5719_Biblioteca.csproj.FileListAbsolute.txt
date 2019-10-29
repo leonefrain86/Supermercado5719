@@ -1,6 +1,0 @@
-C:\Users\L21-PC05\Documents\GitHub\Supermercado5719\Supermercado5719_Biblioteca\Supermercado5719_Biblioteca\bin\Debug\netcoreapp2.2\Supermercado5719_Biblioteca.deps.json
-C:\Users\L21-PC05\Documents\GitHub\Supermercado5719\Supermercado5719_Biblioteca\Supermercado5719_Biblioteca\bin\Debug\netcoreapp2.2\Supermercado5719_Biblioteca.dll
-C:\Users\L21-PC05\Documents\GitHub\Supermercado5719\Supermercado5719_Biblioteca\Supermercado5719_Biblioteca\obj\Debug\netcoreapp2.2\Supermercado5719_Biblioteca.csprojAssemblyReference.cache
-C:\Users\L21-PC05\Documents\GitHub\Supermercado5719\Supermercado5719_Biblioteca\Supermercado5719_Biblioteca\obj\Debug\netcoreapp2.2\Supermercado5719_Biblioteca.csproj.CoreCompileInputs.cache
-C:\Users\L21-PC05\Documents\GitHub\Supermercado5719\Supermercado5719_Biblioteca\Supermercado5719_Biblioteca\obj\Debug\netcoreapp2.2\Supermercado5719_Biblioteca.AssemblyInfoInputs.cache
-C:\Users\L21-PC05\Documents\GitHub\Supermercado5719\Supermercado5719_Biblioteca\Supermercado5719_Biblioteca\obj\Debug\netcoreapp2.2\Supermercado5719_Biblioteca.AssemblyInfo.cs
