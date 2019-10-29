@@ -7,12 +7,12 @@ namespace Supermercado5719_Biblioteca
     public class Venta
     {
         public int numVenta { get; set; }
-        public int numCaja { get; set; }
-        public List<Articulo> articulos { get; set; }
+        public Caja caja { get; set; }
+        public Ticket ticket { get; set; }
 
         public Venta()
         {
-            this.articulos = new List<Articulo>();
+            ticket = new Ticket();
         }
 
 
