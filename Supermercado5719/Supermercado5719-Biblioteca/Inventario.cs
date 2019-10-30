@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Supermercado5719_Biblioteca
 {
-    class Inventario
+    public class Inventario
     {
+        public int idInventario { get; set; }
+        public List<stockArticulos> stockArticulos { get; set; }
     }
 }

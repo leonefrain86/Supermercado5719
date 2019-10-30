@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Supermercado5719_Biblioteca
+﻿namespace Supermercado5719_Biblioteca
 {
     public class Venta
     {
@@ -10,11 +6,11 @@ namespace Supermercado5719_Biblioteca
         public Caja caja { get; set; }
         public Ticket ticket { get; set; }
 
-        public Venta()
+        public Venta(Caja caja,  string codigoBarra, int cantidad)
         {
-            ticket = new Ticket();
+            numVenta = 1;
+            this.caja = caja;
+            ticket = new Ticket(codigoBarra, cantidad);
         }
-
-
     }
 }

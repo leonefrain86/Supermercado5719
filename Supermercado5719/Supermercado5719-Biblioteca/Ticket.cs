@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using LiteDB;
+﻿using System.Collections.Generic;
 
 namespace Supermercado5719_Biblioteca
 {
     public class Ticket
     {
         public int idTicket { get; set; }
-        public int codigoBarra { get; set; }
-        public int cantidad { get; set; }
+        public List<Item> items { get; set; }
 
-        public Ticket()
+        public Ticket(string codigoBarra, int cantidad)
         {
-
+            items.Add(new Item(codigoBarra, cantidad));
         }
 
     }
