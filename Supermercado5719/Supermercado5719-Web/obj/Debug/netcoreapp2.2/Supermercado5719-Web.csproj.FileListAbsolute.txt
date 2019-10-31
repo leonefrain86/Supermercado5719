@@ -5,7 +5,6 @@ C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermerc
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\bin\Debug\netcoreapp2.2\Supermercado5719-Web.pdb
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\bin\Debug\netcoreapp2.2\Supermercado5719-Web.Views.dll
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\bin\Debug\netcoreapp2.2\Supermercado5719-Web.Views.pdb
-C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.csprojAssemblyReference.cache
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.csproj.CoreCompileInputs.cache
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.RazorAssemblyInfo.cache
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.RazorAssemblyInfo.cs
@@ -28,4 +27,4 @@ C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermerc
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.dll
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.pdb
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.csproj.CopyComplete
-C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Razor\Views\Home\View.g.cshtml.cs
+C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.csprojAssemblyReference.cache
