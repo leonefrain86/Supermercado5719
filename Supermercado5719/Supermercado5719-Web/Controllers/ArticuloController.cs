@@ -9,16 +9,6 @@ namespace Supermercado5719_Web.Controllers
 {
     public class ArticuloController : Controller
     {
-        private readonly object LiteDbContext db;
 
-        public ArticuloController(LiteDBContext db)
-        {
-            this.db = db;
-        }
-        [HttpGet]
-        public IActionResult Index()
-        {
-            var articulos = db.CollecGetCollections<Articulo>();
-        }
     }
 }
