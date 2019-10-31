@@ -27,3 +27,4 @@ C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermerc
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.dll
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.pdb
 C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.csproj.CopyComplete
+C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.csprojAssemblyReference.cache
