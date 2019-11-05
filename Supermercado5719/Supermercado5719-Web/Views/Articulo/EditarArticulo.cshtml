@@ -1,9 +1,7 @@
-﻿@model Supermercado5719_Biblioteca.Articulo
-@{
-    ViewData["Title"] = "Articulo nuevo";
-}
+﻿
+@model Supermercado5719_Biblioteca.Articulo
 
-<h1>View</h1>
+<h1>class="display-4 mt-5">Editar Articulo</h1>
 <form asp-controller="Articulo" asp-action="Agregar" method="post">
     <div class="form-row">
         <div class="form-group col-6">
@@ -33,5 +31,5 @@
         <br />
         <input type="submit" class="btn btn-outline-primary" value="Guardar" />
         <a asp-controller="Articulo" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
-        </div>
+    </div>
 </form>

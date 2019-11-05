@@ -61,3 +61,8 @@ C:\Users\L21-PC05\AppData\Local\GitHubDesktop\app-2.1.3\Supermercado5719\Superme
 C:\Users\L21-PC05\AppData\Local\GitHubDesktop\app-2.1.3\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.csproj.CopyComplete
 C:\Users\L21-PC05\AppData\Local\GitHubDesktop\app-2.1.3\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.dll
 C:\Users\L21-PC05\AppData\Local\GitHubDesktop\app-2.1.3\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Supermercado5719-Web.pdb
+C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\bin\Debug\netcoreapp2.2\Supermercado5719-Biblioteca.dll
+C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\bin\Debug\netcoreapp2.2\Supermercado5719-Biblioteca.pdb
+C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Razor\Views\Articulo\AgregarArticulo.g.cshtml.cs
+C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Razor\Views\Articulo\EditarArticulo.g.cshtml.cs
+C:\Users\Lab21-PC06\Documents\GitHub\Supermercado5719\Supermercado5719\Supermercado5719-Web\obj\Debug\netcoreapp2.2\Razor\Views\Articulo\Index.g.cshtml.cs
