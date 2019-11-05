@@ -1,0 +1,35 @@
+﻿
+@model Supermercado5719_Biblioteca.Articulo
+
+<h1>class="display-4 mt-5">Editar Articulo</h1>
+<form asp-controller="Articulo" asp-action="Agregar" method="post">
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="descripción">Descripción</label>
+            <input asp-for="descripcion" type="text" placeholder="Descripción" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label for="descripción abreviada">Descripción abreviada</label>
+            <input asp-for="descripcionAbreviada" type="text" placeholder="Descripción" class="form-control" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="precio">Precio</label>
+            <input asp-for="precio" type="text" placeholder="Precio" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label for="codigoBarra">Codigo de barra</label>
+            <input asp-for="codigoBarra" type="text" placeholder="Codigo de barra" class="form-control" />
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="codigoInterno">Codigo interno</label>
+                <input asp-for="codigoInterno" type="text" placeholder="Codigo interno" class="form-control" />
+            </div>
+        </div>
+        <br />
+        <input type="submit" class="btn btn-outline-primary" value="Guardar" />
+        <a asp-controller="Articulo" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
+    </div>
+</form>
