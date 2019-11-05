@@ -2,6 +2,7 @@
 {
     public class Venta
     {
+        public int idVenta { get; set; }
         public int numVenta { get; set; }
         public Caja caja { get; set; }
         public Ticket ticket { get; set; }
