@@ -11,10 +11,5 @@ namespace Supermercado5719_Biblioteca
         public int cantidad { get; set; }
         public double precioSubtotal { get; set; }
 
-        public Item(string codigoBarra, int cantidad)
-        {
-            this.cantidad = cantidad;
-        }
-
     }
 }

@@ -9,10 +9,5 @@ namespace Supermercado5719_Biblioteca
         public double preciTotal {get; set;}
         public List<Item> items { get; set; }
 
-        public Ticket(string codigoBarra, int cantidad)
-        {
-            items.Add(new Item(codigoBarra, cantidad));
-        }
-
     }
 }

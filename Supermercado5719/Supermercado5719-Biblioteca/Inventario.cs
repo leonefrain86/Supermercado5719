@@ -8,5 +8,6 @@ namespace Supermercado5719_Biblioteca
     {
         public int idInventario { get; set; }
         public List<stockArticulos> stockArticulos { get; set; }
+
     }
 }
