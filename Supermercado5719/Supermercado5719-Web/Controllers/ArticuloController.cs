@@ -16,7 +16,7 @@ namespace Supermercado5719_Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult AgregarArticulo()
         {
             return View();
         }
