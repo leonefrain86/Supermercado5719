@@ -44,7 +44,7 @@ namespace Supermercado5719_Web.Controllers
         public IActionResult AgregarArticulo(int NumCaja, int NumTicket)
         {
             var ventas = db.Context.GetCollection<Venta>("supermercado").FindAll();
-            var venta = ventas.FirstOrDefault(x => x.numCaja == NumCaja && x.numTicket == NumTicket);
+            var venta = ventas.FirstOrDefault(x => x.numCaja == NumCaja);
             ViewBag.NumCaja = NumCaja;
             ViewBag.NumTicket = NumTicket;
             return RedirectToAction("AgregarArticulo", venta);
