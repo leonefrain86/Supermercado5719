@@ -1,7 +1,10 @@
-﻿namespace Supermercado5719_Biblioteca
+﻿using System.Collections.Generic;
+
+namespace Supermercado5719_Biblioteca
 {
     public class Articulo
     { 
+        public int id { get; set; }
         public int idArticulo { get; set; }
         public string codigoBarra { get; set; }
         public int codigoInterno { get; set; }
@@ -17,5 +20,7 @@
             this.descripcionAbreviada = descripcionAbreviada;
             this.precio = precio;
         }
+        
+
     }
 }
