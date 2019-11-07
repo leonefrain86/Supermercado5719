@@ -1,1 +1,18 @@
-﻿
+﻿@model Supermercado5719_Biblioteca.Venta;
+
+<h1 class="display-4 mt-5">Nuevo venta</h1>
+<form asp-controller="Venta" asp-action="VentaCaja" method="post">
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="Ticket">idTicket</label>
+            <input asp-for="ticket" type="text" placeholder="ticket" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label for="numCaja">numCaja</label>
+            <input asp-for="numCaja" type="text" placeholder="numCaja" class="form-control" />
+        </div>
+    </div>
+    <a role="button" asp-controller="Agregar" asp-action="Agregar" class="btn btn-outline-primary">Agregar</a>
+    <input type="submit" class="btn btn-outline-primary" value="Guardar" />
+    <a asp-controller="Venta" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
+</form>
