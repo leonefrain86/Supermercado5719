@@ -4,8 +4,7 @@ namespace Supermercado5719_Biblioteca
 {
     public class Ticket
     {
-        public int idTicket { get; set; }
-        public int descripcionAbreviada { get; set; }
+        public int id { get; set; }
         public double preciTotal {get; set;}
         public List<Item> items { get; set; }
 

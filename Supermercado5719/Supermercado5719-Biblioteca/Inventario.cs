@@ -6,7 +6,7 @@ namespace Supermercado5719_Biblioteca
 {
     public class Inventario
     {
-        public int idInventario { get; set; }
+        public int id { get; set; }
         public List<stockArticulos> stockArticulos { get; set; }
 
     }

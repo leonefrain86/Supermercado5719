@@ -30,11 +30,40 @@ namespace Supermercado5719_Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult RealizarVenta(Venta venta)
+        public IActionResult RealizarVenta(Venta unaVenta)
         {
             var ventas = db.Context.GetCollection<Venta>("supermercado");
-            ventas.Insert(venta);
-            return RedirectToAction("Index", ventas.FindAll());
+
+            ventas.Insert(unaVenta);
+            
+            return RedirectToAction("Index");
+        }
+
+        //Agregar Articulo
+        [HttpGet]
+        public IActionResult AgregarArticulo(int NumCaja, int NumTicket)
+        {
+            var ventas = db.Context.GetCollection<Venta>("supermercado").FindAll();
+            var venta = ventas.FirstOrDefault(x => x.numCaja == NumCaja && x.numTicket == NumTicket);
+            ViewBag.NumCaja = NumCaja;
+            ViewBag.NumTicket = NumTicket;
+            return RedirectToAction("AgregarArticulo", venta);
+        }
+
+        [HttpPost]
+        public IActionResult AgregarArticulo(int NumCaja, int NumTicket, string codigoBarra, int unidades)
+        {
+            var ventas = db.Context.GetCollection<Venta>("supermercado").FindAll();
+
+            var venta = ventas.FirstOrDefault(x => x.numCaja == NumCaja && x.numTicket == NumTicket);
+
+            var articulos = db.Context.GetCollection<Articulo>("articulos").FindAll();
+
+            var nuevoArt = articulos.FirstOrDefault(x => x.codigoBarra == codigoBarra);
+            
+            venta.ticket.items.Add(new Item { articulo = nuevoArt, cantidad = unidades, precioSubtotal = unidades*nuevoArt.precio});
+            
+            return RedirectToAction("RealizarVenta");
         }
     }
 }
