@@ -11,14 +11,14 @@
             <input asp-for="unidades" type="text" placeholder="unidades" class="form-control" />
         </div>
         <div class="form-group col-6">
-            <label for="numCaja">Numero de Caja: </label>
-            <input asp-for="numCaja" type="text" placeholder="numCaja" class="form-control" value="@ViewBag.NumCaja" />
+            <label for="numTicket">Numero de Ticket: </label>
+            <input asp-for="numTicket" type="number" placeholder="numTicket" class="form-control" value="@ViewBag.venta.numTicket" />
         </div>
         <div class="form-group col-6">
-            <label for="numTicket">Numero de Ticket: </label>
-            <input asp-for="numTicket" type="text" placeholder="numTicket" class="form-control" value="@ViewBag.NumTicket" />
+            <label for="numCaja">Numero de Caja: </label>
+            <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" value="@ViewBag.venta.numCaja" />
         </div>
     </div>
-    <input type="submit" class="btn btn-outline-primary" value="Guardar" />
+    <input type="submit" class="btn btn-outline-primary" value="Hecho" />
     <a asp-controller="Venta" asp-action="RealizarVenta" role="button" class="btn btn-outline-secondary">Carcelar</a>
 </form>

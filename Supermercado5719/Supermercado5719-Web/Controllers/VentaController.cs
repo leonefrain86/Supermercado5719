@@ -26,43 +26,63 @@ namespace Supermercado5719_Web.Controllers
         [HttpGet]
         public IActionResult RealizarVenta()
         {
+            var master = db.Context.GetCollection<Supermercado>("supermercado");
+
+            var supermercado = new Supermercado()
+            {
+                cajas = new List<Caja>() { new Caja { numCaja = 1}, new Caja { numCaja = 2 }, new Caja { numCaja = 3 } , new Caja { numCaja = 4 }, new Caja { numCaja = 5 } },
+                inventario = new Inventario()
+
+            };
+
+            master.Insert(supermercado);
+
             return View("RealizarVenta");
         }
 
         [HttpPost]
         public IActionResult RealizarVenta(Venta unaVenta)
         {
-            var ventas = db.Context.GetCollection<Venta>("supermercado");
+            var master = db.Context.GetCollection<Supermercado>("supermercado");
 
-            ventas.Insert(unaVenta);
-            
-            return RedirectToAction("Index");
+            var supermercado = master.FindAll().FirstOrDefault();
+
+            var caja = supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja);
+
+            caja.ventas.Add(unaVenta);
+
+            master.Update(supermercado);
+
+            ViewBag.venta = unaVenta;
+
+            //return RedirectToAction("AgregarArticulo", unaVenta);
+            return View("AgregarArticulo");
         }
 
         //Agregar Articulo
         [HttpGet]
-        public IActionResult AgregarArticulo(int NumCaja, int NumTicket)
+        public IActionResult AgregarArticulo()
         {
-            var ventas = db.Context.GetCollection<Venta>("supermercado").FindAll();
-            var venta = ventas.FirstOrDefault(x => x.numCaja == NumCaja);
-            ViewBag.NumCaja = NumCaja;
-            ViewBag.NumTicket = NumTicket;
-            return RedirectToAction("AgregarArticulo", venta);
+            return View("AgregarArticulo");
         }
 
         [HttpPost]
-        public IActionResult AgregarArticulo(int NumCaja, int NumTicket, string codigoBarra, int unidades)
+        public IActionResult AgregarArticulo(AgregarArticulo agregarArticulo)
         {
-            var ventas = db.Context.GetCollection<Venta>("supermercado").FindAll();
+            var inventarios = db.Context.GetCollection<Inventario>("supermercado");
 
-            var venta = ventas.FirstOrDefault(x => x.numCaja == NumCaja && x.numTicket == NumTicket);
 
-            var articulos = db.Context.GetCollection<Articulo>("articulos").FindAll();
+            var inventario = inventarios.FindAll().FirstOrDefault();
 
-            var nuevoArt = articulos.FirstOrDefault(x => x.codigoBarra == codigoBarra);
-            
-            venta.ticket.items.Add(new Item { articulo = nuevoArt, cantidad = unidades, precioSubtotal = unidades*nuevoArt.precio});
-            
+            var vendido = inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == agregarArticulo.codigoBarra);
+
+            if (vendido.stock - agregarArticulo.unidades < 0)
+                throw new Exception("Error el las unidades a ver son mayores al stock");
+
+            vendido.stock = vendido.stock - agregarArticulo.unidades;
+
+            inventarios.Update(inventario);
+        
             return RedirectToAction("RealizarVenta");
         }
     }

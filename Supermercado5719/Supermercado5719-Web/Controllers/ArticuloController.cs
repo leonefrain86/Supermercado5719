@@ -35,7 +35,7 @@ namespace Supermercado5719_Web.Controllers
         public IActionResult Agregar(Articulo articulo)
         {
             var articulos = db.Context.GetCollection<Articulo>("Articulo");
-
+            
             articulos.Insert(articulo);
 
             return RedirectToAction("AgregarArticulo", articulos.FindAll());

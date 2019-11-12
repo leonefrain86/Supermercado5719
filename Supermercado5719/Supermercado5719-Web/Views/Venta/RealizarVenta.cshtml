@@ -4,15 +4,15 @@
 <form asp-controller="Venta" asp-action="RealizarVenta" method="post">
     <div class="form-row">
         <div class="form-group col-6">
-            <label for="numVenta">numVenta</label>
-            <input asp-for="numTicket" type="text" placeholder="numVenta" class="form-control" />
+            <label for="numTicket">numVenta</label>
+            <input asp-for="numTicket" type="number" placeholder="numTicket" class="form-control" />
         </div>
         <div class="form-group col-6">
             <label for="numCaja">numCaja</label>
-            <input asp-for="numCaja" type="text" placeholder="numCaja" class="form-control" />
+            <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" min="1" max="5"/>
         </div>
     </div>
-    <input type="submit" class="btn btn-outline-primary" value="Guardar" />
+    <input type="submit" class="btn btn-outline-primary" value="Agregar articulo" />
     <a asp-controller="Venta" asp-action="Index" role="button" class="btn btn-outline-secondary">Carcelar</a>
-    <a asp-controller="Venta" asp-action="AgregarArticulo" role="button" class="btn btn-outline-secondary">Agregar articulo</a>
+    @*<a asp-controller="Venta" asp-action="AgregarArticulo" role="button" class="btn btn-outline-secondary">Agregar articulo</a>*@
 </form>
