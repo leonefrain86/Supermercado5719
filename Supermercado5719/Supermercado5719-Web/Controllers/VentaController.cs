@@ -26,16 +26,7 @@ namespace Supermercado5719_Web.Controllers
         [HttpGet]
         public IActionResult RealizarVenta()
         {
-            var master = db.Context.GetCollection<Supermercado>("supermercado");
 
-            var supermercado = new Supermercado()
-            {
-                cajas = new List<Caja>() { new Caja { numCaja = 1}, new Caja { numCaja = 2 }, new Caja { numCaja = 3 } , new Caja { numCaja = 4 }, new Caja { numCaja = 5 } },
-                inventario = new Inventario()
-
-            };
-
-            master.Insert(supermercado);
 
             return View("RealizarVenta");
         }
@@ -43,12 +34,14 @@ namespace Supermercado5719_Web.Controllers
         [HttpPost]
         public IActionResult RealizarVenta(Venta unaVenta)
         {
+            //LLamando a la base de datos principal
             var master = db.Context.GetCollection<Supermercado>("supermercado");
-
             var supermercado = master.FindAll().FirstOrDefault();
+            //
 
             var caja = supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja);
 
+            caja.ventas = new List<Venta>();
             caja.ventas.Add(unaVenta);
 
             master.Update(supermercado);
@@ -69,19 +62,19 @@ namespace Supermercado5719_Web.Controllers
         [HttpPost]
         public IActionResult AgregarArticulo(AgregarArticulo agregarArticulo)
         {
-            var inventarios = db.Context.GetCollection<Inventario>("supermercado");
+            //LLamando a la base de datos principal
+            var master = db.Context.GetCollection<Supermercado>("supermercado");
+            var supermercado = master.FindAll().FirstOrDefault();
+            //
 
+            var ArticuloVendido = supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == agregarArticulo.codigoBarra);
 
-            var inventario = inventarios.FindAll().FirstOrDefault();
-
-            var vendido = inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == agregarArticulo.codigoBarra);
-
-            if (vendido.stock - agregarArticulo.unidades < 0)
+            if (ArticuloVendido.stock - agregarArticulo.unidades < 0)
                 throw new Exception("Error el las unidades a ver son mayores al stock");
 
-            vendido.stock = vendido.stock - agregarArticulo.unidades;
+            supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == agregarArticulo.codigoBarra).stock = ArticuloVendido.stock - agregarArticulo.unidades;
 
-            inventarios.Update(inventario);
+            master.Update(supermercado);
         
             return RedirectToAction("RealizarVenta");
         }

@@ -20,12 +20,17 @@ namespace Supermercado5719_Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var articulos = db.Context.GetCollection<stockArticulos>("Articulo");
+            //LLamando a la base de datos principal
+            //var master = db.Context.GetCollection<Supermercado>("supermercado");
+            //var supermercado = master.FindAll().FirstOrDefault();
+            ////
 
-            ViewBag.CantidadArticulos = articulos.Count();
+            //ViewBag.CantidadArticulos = supermercado.inventario.stockArticulos.Count;
 
-            return View("Index", articulos.FindAll());
+            return View("Index");
         }
+
+        //Agregar Articulo al inventario
         [HttpGet]
         public IActionResult AgregarArticulo()
         {
@@ -34,39 +39,62 @@ namespace Supermercado5719_Web.Controllers
         [HttpPost]
         public IActionResult AgregarArticulo(Articulo articulo)
         {
-            var articulos = db.Context.GetCollection<stockArticulos>("Articulo");
+            //LLamando a la base de datos principal
+            var master = db.Context.GetCollection<Supermercado>("supermercado");
+            var supermercado = master.FindAll().FirstOrDefault();
+            //
             var stockArticulo = new stockArticulos();
             stockArticulo.articulo = articulo;
             stockArticulo.stock++;
-            articulos.Insert(stockArticulo);
+            supermercado.inventario.stockArticulos.Add(stockArticulo);
 
-            return RedirectToAction("Index", articulos.FindAll());
+            master.Update(supermercado);
+
+            return RedirectToAction("Index", master.FindAll());
         }
+
+
+        // Editar Articulo
         [HttpGet]
         public IActionResult Editar(int id)
         {
-            var articulos = db.Context.GetCollection<stockArticulos>("Articulo").FindAll();
+            //LLamando a la base de datos principal
+            var master = db.Context.GetCollection<Supermercado>("supermercado");
+            var supermercado = master.FindAll().FirstOrDefault();
+            //
+            var articulo = supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.id == id);
 
-            var articulo = articulos.FirstOrDefault(x => x.id == id);
 
             return View("EditarArticulo", articulo);
         }
         [HttpPost]
         public IActionResult Editar(Articulo articulo)
         {
-            var articulos = db.Context.GetCollection<stockArticulos>("Articulo");
-            var stockArticulo = new stockArticulos();
-            articulos.Update(stockArticulo);
+            //LLamando a la base de datos principal
+            var master = db.Context.GetCollection<Supermercado>("supermercado");
+            var supermercado = master.FindAll().FirstOrDefault();
+            //
 
-            return RedirectToAction("Index", articulos.FindAll());
+            supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.id == articulo.id).articulo = articulo;
+
+            master.Update(supermercado);
+
+            return RedirectToAction("Index", master.FindAll());
         }
+
+        // Eliminar Articulo
         public IActionResult Eliminar(int id)
         {
-            var articulos = db.Context.GetCollection<stockArticulos>("Articulo");
-            
-            articulos.Delete(x => x.id == id);
+            //LLamando a la base de datos principal
+            var master = db.Context.GetCollection<Supermercado>("supermercado");
+            var supermercado = master.FindAll().FirstOrDefault();
+            //
+            var articuloEliminado = supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.id == id);
+            supermercado.inventario.stockArticulos.Remove(articuloEliminado);
 
-            return RedirectToAction("Index", articulos.FindAll());
+            master.Update(supermercado);
+
+            return RedirectToAction("Index", master.FindAll());
         }
     }
 }
