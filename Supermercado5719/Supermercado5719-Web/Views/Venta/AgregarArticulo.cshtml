@@ -19,6 +19,8 @@
             <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" value="@ViewBag.venta.numCaja" />
         </div>
     </div>
-    <input type="submit" class="btn btn-outline-primary" value="Hecho" />
-    <a asp-controller="Venta" asp-action="RealizarVenta" role="button" class="btn btn-outline-secondary">Carcelar</a>
+    <div  class="form-group col-6">
+    <input type="submit" class="btn btn-outline-primary" value="Guardar" />
+    <a asp-controller="Venta" asp-action="RealizarVenta" role="button" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
 </form>

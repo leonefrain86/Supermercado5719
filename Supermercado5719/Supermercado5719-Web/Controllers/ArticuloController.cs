@@ -18,53 +18,55 @@ namespace Supermercado5719_Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult AgregarArticulo()
+        public IActionResult Index()
         {
-            //var articulos = db.Context.GetCollection<Articulo>("Articulo");
+            var articulos = db.Context.GetCollection<stockArticulos>("Articulo");
 
-            //ViewBag.CantidadArticulos = articulos.Count();
+            ViewBag.CantidadArticulos = articulos.Count();
 
-            return View("AgregarArticulo");
+            return View("Index", articulos.FindAll());
         }
         [HttpGet]
-        public IActionResult Agregar()
+        public IActionResult AgregarArticulo()
         {
-            return View("Agregar");
+            return View("AgregarArticulo");
         }
         [HttpPost]
-        public IActionResult Agregar(Articulo articulo)
+        public IActionResult AgregarArticulo(Articulo articulo)
         {
-            var articulos = db.Context.GetCollection<Articulo>("Articulo");
-            
-            articulos.Insert(articulo);
+            var articulos = db.Context.GetCollection<stockArticulos>("Articulo");
+            var stockArticulo = new stockArticulos();
+            stockArticulo.articulo = articulo;
+            stockArticulo.stock++;
+            articulos.Insert(stockArticulo);
 
-            return RedirectToAction("AgregarArticulo", articulos.FindAll());
+            return RedirectToAction("Index", articulos.FindAll());
         }
         [HttpGet]
         public IActionResult Editar(int id)
         {
-            var articulos = db.Context.GetCollection<Articulo>("Articulo").FindAll();
+            var articulos = db.Context.GetCollection<stockArticulos>("Articulo").FindAll();
 
-            var articulo = articulos.FirstOrDefault(x => x.idArticulo == id);
+            var articulo = articulos.FirstOrDefault(x => x.id == id);
 
-            return View("Editar", articulo);
+            return View("EditarArticulo", articulo);
         }
         [HttpPost]
         public IActionResult Editar(Articulo articulo)
         {
-            var articulos = db.Context.GetCollection<Articulo>("Articulo");
+            var articulos = db.Context.GetCollection<stockArticulos>("Articulo");
+            var stockArticulo = new stockArticulos();
+            articulos.Update(stockArticulo);
 
-            articulos.Update(articulo);
-
-            return RedirectToAction("AgregarArticulo", articulos.FindAll());
+            return RedirectToAction("Index", articulos.FindAll());
         }
         public IActionResult Eliminar(int id)
         {
-            var articulos = db.Context.GetCollection<Articulo>("Articulo");
+            var articulos = db.Context.GetCollection<stockArticulos>("Articulo");
             
-            articulos.Delete(x => x.idArticulo == id);
+            articulos.Delete(x => x.id == id);
 
-            return RedirectToAction("AgregarArticulos", articulos.FindAll());
+            return RedirectToAction("Index", articulos.FindAll());
         }
     }
 }
