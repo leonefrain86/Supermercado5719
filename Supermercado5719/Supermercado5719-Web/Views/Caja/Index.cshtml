@@ -1,0 +1,26 @@
+﻿
+@model IEnumerable<Supermercado5719_Biblioteca.Articulo>
+<div class="row">
+    <div class="col-10">
+        <h1 class="display-4">Cajas</h1>
+    </div>
+    <div class="col-2">
+        <img src="https://thumbs.gfycat.com/DelayedWavyKatydid-size_restricted.gif" height="100" width="150" class="text-center">
+    </div>
+</div>
+<br />
+<a role="button" asp-controller="Caja" asp-action="VentaCaja" class="btn btn-outline-primary">Caja</a>
+<br />
+<br />
+<p>Cantidad de ventas por caja: <b>@ViewBag.CantidadVentas</b></p>
+<table class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>IdCaja</th>
+            <th>numCaja</th>
+            <th>ventas</th>
+        </tr>
+    </thead>
+   
+</table>
+
