@@ -6,6 +6,7 @@
 </div>
     <br />
     <a role="button" asp-controller="Articulo" asp-action="AgregarArticulo" class="btn btn-outline-primary">Agregar</a>
+    <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Carcelar</a>
     <br />
     <br />
     <table class="table table-bordered table-hover table-sm">
@@ -17,23 +18,25 @@
                 <th>Descripcion</th>
                 <th>DescripcionAbreviada</th>
                 <th>Precio</th>
+                <th>Stock</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var stock in Model)
             {
-                <tr>
-                    <td>@stock.id</td>
-                    <td>@stock.articulo.codigoBarra </td>
-                    <td>@stock.articulo.codigoInterno </td>
-                    <td>@stock.articulo.descripcion</td>
-                    <td>@stock.articulo.descripcionAbreviada </td>
-                    <td>@stock.articulo.precio</td>
-                    <td>
-                        <a asp-controller="Articulo" asp-action="Editar" asp-route-id="@stock.articulo.id" class="btn btn-link">Editar</a> |
-                        <a asp-controller="Articulo" asp-action="Eliminar" asp-route-id="@stock.articulo.id" class="btn btn-link">Eliminar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>@stock.id</td>
+                <td>@stock.articulo.codigoBarra </td>
+                <td>@stock.articulo.codigoInterno </td>
+                <td>@stock.articulo.descripcion</td>
+                <td>@stock.articulo.descripcionAbreviada </td>
+                <td>@stock.articulo.precio</td>
+                <td>@stock.stock</td>
+                <td>
+                    <a asp-controller="Articulo" asp-action="Editar" asp-route-id="@stock.articulo.id" class="btn btn-link">Editar</a> |
+                    <a asp-controller="Articulo" asp-action="Eliminar" asp-route-id="@stock.articulo.id" class="btn btn-link">Eliminar</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Supermercado5719_Biblioteca;
 using Supermercado5719_Web.Models;
@@ -19,7 +16,12 @@ namespace Supermercado5719_Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View("Index");
+            //LLamando a la base de datos principal
+            var master = db.Context.GetCollection<Supermercado>("supermercado");
+            var supermercado = master.FindAll().FirstOrDefault();
+            //
+            
+            return View("Index", supermercado.inventario.stockArticulos);
         }
 
         //Agregar Articulo al inventario
@@ -28,6 +30,7 @@ namespace Supermercado5719_Web.Controllers
         {
             return View("AgregarArticulo");
         }
+
         [HttpPost]
         public IActionResult AgregarArticulo(Articulo articulo)
         {
@@ -35,11 +38,19 @@ namespace Supermercado5719_Web.Controllers
             var master = db.Context.GetCollection<Supermercado>("supermercado");
             var supermercado = master.FindAll().FirstOrDefault();
             //
-            var stockArticulo = new stockArticulos();
-            stockArticulo.articulo = articulo;
-            stockArticulo.stock++;
-            supermercado.inventario.stockArticulos.Add(stockArticulo);
-
+            bool Comprobador = supermercado.inventario.stockArticulos.Exists(x => x.articulo.codigoBarra == articulo.codigoBarra);
+            if (Comprobador == true)
+            {
+                supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == articulo.codigoBarra).stock++;
+            }
+            else
+            {
+                var stockArticulo = new stockArticulos();
+                stockArticulo.articulo = articulo;
+                stockArticulo.stock++;
+                supermercado.inventario.stockArticulos.Add(stockArticulo);
+            }
+            
             master.Update(supermercado);
 
             return RedirectToAction("Index", master.FindAll());
@@ -81,6 +92,7 @@ namespace Supermercado5719_Web.Controllers
             var master = db.Context.GetCollection<Supermercado>("supermercado");
             var supermercado = master.FindAll().FirstOrDefault();
             //
+
             var articuloEliminado = supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.id == id);
             supermercado.inventario.stockArticulos.Remove(articuloEliminado);
 

@@ -1,1 +1,54 @@
-﻿
+﻿@model IEnumerable<Supermercado5719_Biblioteca.Supermercado>
+<div class="row">
+    <div class="col-10">
+        <h1 class="display-4">Ventas realizadas</h1>
+    </div>
+</div>
+<br />
+<a class="nav-link text-dark" asp-area="" asp-controller="Venta" asp-action="RealizarVenta">Nuevas ventas</a>
+<a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Carcelar</a>
+<br />
+<br />
+@*<table class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Numero de caja</th>
+            <th>Numero de ticket</th>
+            <th>Total vendido</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var supermercado in Model)
+        {
+        <tr>
+            <td>@supermercado.id</td>
+            <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 1).numCaja </td>
+            <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 1).ventas.Sum(x => x.ticket.precioTotal) </td>
+           
+        </tr>
+        }
+    </tbody>
+</table>
+<ble class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Numero de caja</th>
+            <th>Numero de ticket</th>
+            <th>Total vendido</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var supermercado in Model)
+        {
+            <tr>
+                <td>@supermercado.id</td>
+                <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 1).numCaja </td>
+                <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 2) </td>
+                <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 3) </td>
+                <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 3) </td>
+            </tr>
+        }
+    </tbody>
+</ble>*@

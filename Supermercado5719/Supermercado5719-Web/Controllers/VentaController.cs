@@ -16,18 +16,21 @@ namespace Supermercado5719_Web.Controllers
             this.db = db;
         }
 
-       [HttpGet]
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            //LLamando a la base de datos principal
+            var master = db.Context.GetCollection<Supermercado>("supermercado");
+            var supermercado = master.FindAll(); //.FirstOrDefault();
+            //
+
+            return View("Index", supermercado);
         }
 
         //Realizar Ventas
         [HttpGet]
         public IActionResult RealizarVenta()
         {
-
-
             return View("RealizarVenta");
         }
 
@@ -39,16 +42,12 @@ namespace Supermercado5719_Web.Controllers
             var supermercado = master.FindAll().FirstOrDefault();
             //
 
-            var caja = supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja);
-
-            caja.ventas = new List<Venta>();
-            caja.ventas.Add(unaVenta);
+            supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ventas.Add(unaVenta);
 
             master.Update(supermercado);
 
             ViewBag.venta = unaVenta;
 
-            //return RedirectToAction("AgregarArticulo", unaVenta);
             return View("AgregarArticulo");
         }
 
@@ -60,19 +59,28 @@ namespace Supermercado5719_Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult AgregarArticulo(AgregarArticulo agregarArticulo)
+        public IActionResult AgregarArticulo(AgregarArticulo item)
         {
             //LLamando a la base de datos principal
             var master = db.Context.GetCollection<Supermercado>("supermercado");
             var supermercado = master.FindAll().FirstOrDefault();
             //
+            var ArticuloVendido = supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == item.codigoBarra);
+            Item unItem = new Item();
 
-            var ArticuloVendido = supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == agregarArticulo.codigoBarra);
+            if ((ArticuloVendido.stock - item.unidades) < 0)
+                throw new Exception("Error, las unidades a vender son mayores al stock");
+            unItem.unidades = item.unidades;
+            unItem.codigoBarra = item.codigoBarra;
+            unItem.precioSubtotal = item.unidades * ArticuloVendido.articulo.precio;
+            supermercado.cajas.FirstOrDefault(x => x.numCaja == item.numCaja).ventas.
+                FirstOrDefault(x => x.numCaja == item.numCaja).ticket.items.Add(unItem);
 
-            if (ArticuloVendido.stock - agregarArticulo.unidades < 0)
-                throw new Exception("Error el las unidades a ver son mayores al stock");
+            var items = supermercado.cajas.FirstOrDefault(x => x.numCaja == item.numCaja).ventas.
+                FirstOrDefault(x => x.numCaja == item.numCaja).ticket;
 
-            supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == agregarArticulo.codigoBarra).stock = ArticuloVendido.stock - agregarArticulo.unidades;
+            supermercado.cajas.FirstOrDefault(x => x.numCaja == item.numCaja).ventas.
+                FirstOrDefault(x => x.numCaja == item.numCaja).ticket.precioTotal = items.items.Sum(x => x.precioSubtotal);
 
             master.Update(supermercado);
         

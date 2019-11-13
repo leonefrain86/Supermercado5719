@@ -20,15 +20,7 @@ namespace Supermercado5719_Web.Controllers
         {
             var master = db.Context.GetCollection<Supermercado>("supermercado");
 
-            var supermercado = new Supermercado()
-            {
-                cajas = new List<Caja>() { new Caja { numCaja = 1, ventas = new List<Venta>() },
-                                           new Caja { numCaja = 2, ventas = new List<Venta>() },
-                                           new Caja { numCaja = 3, ventas = new List<Venta>() },
-                                           new Caja { numCaja = 4, ventas = new List<Venta>() },
-                                           new Caja { numCaja = 5, ventas = new List<Venta>() } },
-                inventario = new Inventario()
-            };
+            var supermercado = new Supermercado();
 
             master.Insert(supermercado);
             return View();
