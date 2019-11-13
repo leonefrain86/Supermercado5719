@@ -16,6 +16,7 @@ namespace Supermercado5719_Web.Controllers
             this.db = db;
         }
 
+        // Index
         [HttpGet]
         public IActionResult Index()
         {
@@ -23,7 +24,6 @@ namespace Supermercado5719_Web.Controllers
             var master = db.Context.GetCollection<Supermercado>("supermercado");
             var supermercado = master.FindAll(); //.FirstOrDefault();
             //
-
             return View("Index", supermercado);
         }
 
@@ -59,32 +59,39 @@ namespace Supermercado5719_Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult AgregarArticulo(AgregarArticulo item)
+        public IActionResult AgregarArticulo(AgregarArticulo itemVendido)
         {
             //LLamando a la base de datos principal
             var master = db.Context.GetCollection<Supermercado>("supermercado");
             var supermercado = master.FindAll().FirstOrDefault();
             //
-            var ArticuloVendido = supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == item.codigoBarra);
+
+            bool ExisteArticulo = supermercado.inventario.stockArticulos.Exists(x => x.articulo.codigoBarra == itemVendido.codigoBarra);
+
+            if (ExisteArticulo == false)
+                throw new Exception("No existe el articulo");
+
+            var ArticuloVendido = supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == itemVendido.codigoBarra);
             Item unItem = new Item();
 
-            if ((ArticuloVendido.stock - item.unidades) < 0)
+            if ((ArticuloVendido.stock - itemVendido.unidades) < 0)
                 throw new Exception("Error, las unidades a vender son mayores al stock");
-            unItem.unidades = item.unidades;
-            unItem.codigoBarra = item.codigoBarra;
-            unItem.precioSubtotal = item.unidades * ArticuloVendido.articulo.precio;
-            supermercado.cajas.FirstOrDefault(x => x.numCaja == item.numCaja).ventas.
-                FirstOrDefault(x => x.numCaja == item.numCaja).ticket.items.Add(unItem);
 
-            var items = supermercado.cajas.FirstOrDefault(x => x.numCaja == item.numCaja).ventas.
-                FirstOrDefault(x => x.numCaja == item.numCaja).ticket;
+            unItem.unidades = itemVendido.unidades;
+            unItem.codigoBarra = itemVendido.codigoBarra;
+            unItem.precioSubtotal = itemVendido.unidades * ArticuloVendido.articulo.precio;
+            supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
+                FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ticket.items.Add(unItem);
 
-            supermercado.cajas.FirstOrDefault(x => x.numCaja == item.numCaja).ventas.
-                FirstOrDefault(x => x.numCaja == item.numCaja).ticket.precioTotal = items.items.Sum(x => x.precioSubtotal);
+            var itemsVendidos = supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
+                FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ticket;
+
+            supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
+                FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ticket.precioTotal = itemsVendidos.items.Sum(x => x.precioSubtotal);
 
             master.Update(supermercado);
         
-            return RedirectToAction("RealizarVenta");
+            return View("RealizarVenta");
         }
     }
 }

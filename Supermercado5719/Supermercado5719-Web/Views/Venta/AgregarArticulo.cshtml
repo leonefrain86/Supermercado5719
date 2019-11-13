@@ -4,19 +4,19 @@
     <div class="form-row">
         <div class="form-group col-6">
             <label for="numVenta">codigo de barra: </label>
-            <input asp-for="codigoBarra" type="text" placeholder="codigoBarra" class="form-control" />
+            <input asp-for="codigoBarra" type="text" placeholder="codigoBarra" class="form-control " min="1" max="5" />
         </div>
         <div class="form-group col-6">
             <label for="numCaja">cant. de unidades: </label>
-            <input asp-for="unidades" type="text" placeholder="unidades" class="form-control" />
+            <input asp-for="unidades" type="text" placeholder="unidades" class="form-control" min="1" max="5"/>
         </div>
         <div class="form-group col-6">
             <label for="numTicket">Numero de Ticket: </label>
-            <input asp-for="numTicket" type="number" placeholder="numTicket" class="form-control" value="@ViewBag.venta.numTicket" />
+            <input asp-for="numTicket" type="text" placeholder="numTicket" class="form-control" value="@ViewBag.venta.numTicket" />
         </div>
         <div class="form-group col-6">
             <label for="numCaja">Numero de Caja: </label>
-            <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" value="@ViewBag.venta.numCaja" />
+            <input asp-for="numCaja" type="text" placeholder="numCaja" class="form-control" value="@ViewBag.venta.numCaja" />
         </div>
     </div>
     <div  class="form-group col-6">

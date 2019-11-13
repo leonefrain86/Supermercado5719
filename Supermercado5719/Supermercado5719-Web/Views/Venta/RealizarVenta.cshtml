@@ -5,11 +5,11 @@
     <div class="form-row">
         <div class="form-group col-6">
             <label for="numTicket">Numero de venta</label>
-            <input asp-for="numTicket" type="number" placeholder="numTicket" class="form-control" />
+            <input asp-for="numTicket" type="number" placeholder="numTicket" class="form-control" min="1" required />
         </div>
         <div class="form-group col-6">
             <label for="numCaja">Numero de caja</label>
-            <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" min="1" max="5"/>
+            <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" min="1" max="5" required />
         </div>
     </div>
     <input type="submit" class="btn btn-outline-primary" value="Agregar articulo" />
