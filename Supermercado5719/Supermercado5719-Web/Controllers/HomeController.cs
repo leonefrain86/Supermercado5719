@@ -15,14 +15,15 @@ namespace Supermercado5719_Web.Controllers
         public HomeController(LiteDbContext db)
         {
             this.db = db;
-        }
-        public IActionResult Index()
-        {
             var master = db.Context.GetCollection<Supermercado>("supermercado");
 
             var supermercado = new Supermercado();
 
             master.Insert(supermercado);
+        }
+        
+        public IActionResult Index()
+        {
             return View();
         }
 

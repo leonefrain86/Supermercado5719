@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Supermercado5719_Biblioteca.Supermercado>
+﻿@model IEnumerable<Supermercado5719_Biblioteca.Caja>
 <div class="row">
     <div class="col-10">
-        <h1 class="display-4">Ventas realizadas</h1>
+        <h1 class="display-4">Ventas</h1>
     </div>
 </div>
 <br />
@@ -9,46 +9,56 @@
 <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Carcelar</a>
 <br />
 <br />
-@*<table class="table table-bordered table-hover table-sm">
+<table class="table table-bordered table-hover table-sm">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Numero de caja</th>
-            <th>Numero de ticket</th>
-            <th>Total vendido</th>
+            <th>Ventas realizadas</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var supermercado in Model)
+        @foreach (var caja in Model)
         {
         <tr>
-            <td>@supermercado.id</td>
-            <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 1).numCaja </td>
-            <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 1).ventas.Sum(x => x.ticket.precioTotal) </td>
-           
+            <td>@caja.numCaja</td>
+            <td>
+                <table class="table table-bordered table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Numero de ticket</th>
+                            <th>Articulos vendidos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var venta in caja.ventas)
+                        {
+                        <tr>
+                            <td>@venta.numTicket</td>
+                            <td>
+                                <table class="table table-bordered table-hover table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo de barra</th>
+                                            <th>Codigo Interno</th>
+                                            <th>Descripcion Abreviada</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in venta.ticket.items)
+                                        {
+                                        <tr>
+                                            <td>@item.articulo.codigoBarra</td>
+                                            <td>@item.articulo.codigoInterno</td>
+                                            <td>@item.articulo.descripcionAbreviada</td>
+                                        </tr>
+                                        }
+                                </table>
+                            </td>
+                        </tr>
+                        }
+                </table>
+            </td>   
         </tr>
         }
     </tbody>
 </table>
-<ble class="table table-bordered table-hover table-sm">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Numero de caja</th>
-            <th>Numero de ticket</th>
-            <th>Total vendido</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var supermercado in Model)
-        {
-            <tr>
-                <td>@supermercado.id</td>
-                <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 1).numCaja </td>
-                <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 2) </td>
-                <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 3) </td>
-                <td>@supermercado.cajas.FirstOrDefault(x => x.numCaja == 3) </td>
-            </tr>
-        }
-    </tbody>
-</ble>*@
