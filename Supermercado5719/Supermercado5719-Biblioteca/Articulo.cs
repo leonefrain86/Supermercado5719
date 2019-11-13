@@ -10,6 +10,5 @@ namespace Supermercado5719_Biblioteca
         public string descripcion { get; set; }
         public string descripcionAbreviada { get; set; }
         public double precio { get; set; }
-
     }
 }

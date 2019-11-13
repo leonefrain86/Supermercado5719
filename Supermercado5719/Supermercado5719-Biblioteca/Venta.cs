@@ -9,7 +9,9 @@
 
         public Venta()
         {
-             
+            numTicket = 0;
+            numCaja = 0;
+            ticket = new Ticket();
         }
     }
 }

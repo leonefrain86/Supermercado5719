@@ -8,5 +8,11 @@ namespace Supermercado5719_Biblioteca
         public Inventario inventario { get; set; }
         public List<Caja> cajas { get; set; }
 
+        public Supermercado()
+        {
+            inventario = new Inventario();
+            cajas = new List<Caja>();
+        }
+
     }
 }

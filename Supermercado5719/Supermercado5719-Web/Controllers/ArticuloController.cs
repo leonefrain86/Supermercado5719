@@ -8,7 +8,6 @@ using Supermercado5719_Web.Models;
 
 namespace Supermercado5719_Web.Controllers
 {
-
     public class ArticuloController : Controller
     {
         private readonly LiteDbContext db;
@@ -20,13 +19,6 @@ namespace Supermercado5719_Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            //LLamando a la base de datos principal
-            //var master = db.Context.GetCollection<Supermercado>("supermercado");
-            //var supermercado = master.FindAll().FirstOrDefault();
-            ////
-
-            //ViewBag.CantidadArticulos = supermercado.inventario.stockArticulos.Count;
-
             return View("Index");
         }
 

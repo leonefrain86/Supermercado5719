@@ -11,5 +11,12 @@ namespace Supermercado5719_Biblioteca
         public int cantidad { get; set; }
         public double precioSubtotal { get; set; }
 
+        public Item()
+        {
+            cantidad = 0;
+            precioSubtotal = 0;
+            articulo = new Articulo();
+        }
+
     }
 }
