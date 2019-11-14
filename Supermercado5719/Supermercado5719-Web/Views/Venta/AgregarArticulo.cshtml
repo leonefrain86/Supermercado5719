@@ -7,23 +7,24 @@
     <div class="form-row">
         <div class="form-group col-6">
             <label for="numVenta">codigo de barra: </label>
-            <input asp-for="codigoBarra" type="text" placeholder="codigoBarra" class="form-control " min="1" max="5" />
+            <input asp-for="codigoBarra" type="text" placeholder="codigoBarra" class="form-control "  required/>
         </div>
         <div class="form-group col-6">
             <label for="numCaja">cant. de unidades: </label>
-            <input asp-for="unidades" type="text" placeholder="unidades" class="form-control" min="1" max="5" />
+            <input asp-for="unidades" type="number" placeholder="unidades" class="form-control" required />
         </div>
         <div class="form-group col-6">
             <label for="numTicket">Numero de Ticket: </label>
-            <input asp-for="numTicket" type="text" placeholder="numTicket" class="form-control" value="@ViewBag.venta.numTicket" />
+            <input asp-for="numTicket" type="number" placeholder="numTicket" class="form-control" value="@ViewBag.venta.numTicket" readonly/>
         </div>
         <div class="form-group col-6">
             <label for="numCaja">Numero de Caja: </label>
-            <input asp-for="numCaja" type="text" placeholder="numCaja" class="form-control" value="@ViewBag.venta.numCaja" />
+            <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" value="@ViewBag.venta.numCaja" readonly/>
         </div>
     </div>
     <div class="form-group col-6">
-        <input type="submit" class="btn btn-outline-primary" value="Guardar" />
-        <a asp-controller="Venta" asp-action="RealizarVenta" role="button" class="btn btn-outline-secondary">Cancelar</a>
+
+        <input type="submit" class="btn btn-outline-primary" value="Vender" />
+        <a asp-controller="Venta" asp-action="RealizarVenta" role="button" class="btn btn-outline-secondary">Volver</a>
     </div>
 </form>

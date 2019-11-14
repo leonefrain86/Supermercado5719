@@ -24,6 +24,13 @@ namespace Supermercado5719_Web.Controllers
             var master = db.Context.GetCollection<Supermercado>("supermercado");
             var supermercado = master.FindAll().FirstOrDefault();
             //
+
+            foreach (var caja in supermercado.cajas)
+            {
+                caja.ventas.RemoveAll(x => x.ticket.items.Count() == 0);
+            }
+
+            master.Update(supermercado);
             return View("Index", supermercado.cajas);
         }
 
@@ -99,7 +106,7 @@ namespace Supermercado5719_Web.Controllers
 
             master.Update(supermercado);
         
-            return RedirectToAction("RealizarVenta");
+            return RedirectToAction("AgregarArticulo");
         }
     }
 }
