@@ -49,11 +49,25 @@ namespace Supermercado5719_Web.Controllers
             var supermercado = master.FindAll().FirstOrDefault();
             //
 
-            supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ventas.Add(unaVenta);
+            //Revisar ya que no se guarda en un ticket determinado
 
+            //supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ventas.FirstOrDefault(x => x.ticket.numTicket == unaVenta.numTicket).
+            bool ExisteVenta = supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ventas.Exists(x => x.numCaja == unaVenta.numCaja);
+            if (ExisteVenta == true)
+            {
+                supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ventas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).numTicket++;
+            }
+            else
+            {
+                Ticket tiket = new Ticket();
+
+                
+
+                supermercado.cajas.FirstOrDefault(X => X.numCaja == unaVenta.numCaja).ventas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ticket = new Ticket();
+            }
             master.Update(supermercado);
 
-            ViewBag.venta = unaVenta;
+            ViewBag.venta = supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ventas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja);
 
             return View("AgregarArticulo");
         }
@@ -102,11 +116,14 @@ namespace Supermercado5719_Web.Controllers
             supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
                 FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ticket.precioTotal = itemsVendidos.items.Sum(x => x.precioSubtotal);
 
-            
+            ViewBag.venta = supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja);
 
             master.Update(supermercado);
-        
-            return RedirectToAction("AgregarArticulo");
+
+            //return RedirectToAction("AgregarArticulo");
+
+            return View();
+            
         }
     }
 }

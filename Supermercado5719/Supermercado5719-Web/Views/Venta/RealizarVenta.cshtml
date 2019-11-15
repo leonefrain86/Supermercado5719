@@ -3,10 +3,10 @@
 <h1 class="display-4 mt-5">Realizar venta</h1>
 <form asp-controller="Venta" asp-action="RealizarVenta" method="post">
     <div class="form-row">
-        <div class="form-group col-6">
+        @*<div class="form-group col-6">
             <label for="numTicket">Numero de venta</label>
             <input asp-for="numTicket" type="number" placeholder="numTicket" class="form-control" min="1" required />
-        </div>
+        </div>*@
         <div class="form-group col-6">
             <label for="numCaja">Numero de caja</label>
             <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" min="1" max="5" required />
