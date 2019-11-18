@@ -23,13 +23,14 @@ namespace Supermercado5719_Web.Controllers
             //LLamando a la base de datos principal
             var master = db.Context.GetCollection<Supermercado>("supermercado");
             var supermercado = master.FindAll().FirstOrDefault();
-            //
 
+            //Elimino los ticket con lista de item vacios
             foreach (var caja in supermercado.cajas)
             {
-                caja.ventas.RemoveAll(x => x.ticket.items.Count() == 0);
+                caja.tickets.RemoveAll(x => x.ticket.items.Count() == 0);
             }
 
+            //Actualizo el db
             master.Update(supermercado);
             return View("Index", supermercado.cajas);
         }
@@ -42,32 +43,24 @@ namespace Supermercado5719_Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult RealizarVenta(Venta unaVenta)
+        public IActionResult RealizarVenta(Ticket unTicket)
         {
             //LLamando a la base de datos principal
             var master = db.Context.GetCollection<Supermercado>("supermercado");
             var supermercado = master.FindAll().FirstOrDefault();
-            //
 
-            //Revisar ya que no se guarda en un ticket determinado
+            //Incremento el numTicket automaticamente
+            int numAuxTicket = supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets.Count()++;
 
-            //supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ventas.FirstOrDefault(x => x.ticket.numTicket == unaVenta.numTicket).
-            bool ExisteVenta = supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ventas.Exists(x => x.numCaja == unaVenta.numCaja);
-            if (ExisteVenta == true)
-            {
-                supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ventas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).numTicket++;
-            }
-            else
-            {
-                Ticket tiket = new Ticket();
+            //Instancio una nueva lista de ticket
+            supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets = 
+                new List<Ticket>{new Ticket{numTicket = numAuxTicket, numCaja = unTicket.numCaja, items = new List<Item>(), precioTotal = 0}};
 
-                
-
-                supermercado.cajas.FirstOrDefault(X => X.numCaja == unaVenta.numCaja).ventas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ticket = new Ticket();
-            }
+            //Actualizo la db
             master.Update(supermercado);
 
-            ViewBag.venta = supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).ventas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja);
+            //Guardo el ticket
+            ViewBag.ticket = supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).tickets.FirstOrDefault(x => x.numTicket == unTicket.numTicket);
 
             return View("AgregarArticulo");
         }
@@ -85,38 +78,48 @@ namespace Supermercado5719_Web.Controllers
             //LLamando a la base de datos principal
             var master = db.Context.GetCollection<Supermercado>("supermercado");
             var supermercado = master.FindAll().FirstOrDefault();
-            //
 
-            //Compruevo si existe el Articulo
-            bool ExisteArticulo = supermercado.inventario.stockArticulos.Exists(x => x.articulo.codigoBarra == itemVendido.codigoBarra);
+            //Compruebo si existe el Articulo
+            bool ExisteArticulo = supermercado.inventario.stockArticulos.
+                Exists(x => x.articulo.codigoBarra == itemVendido.codigoBarra);
             if (ExisteArticulo == false)
                 throw new Exception("No existe el articulo");
-            var ArticuloVendido = supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == itemVendido.codigoBarra);
-            
 
-            //Resto las unidades vendidas
+            //Obtengo el articulo
+            var ArticuloVendido = supermercado.inventario.stockArticulos.
+                FirstOrDefault(x => x.articulo.codigoBarra == itemVendido.codigoBarra);
+            
+            //Compruebo si hay sufiente stock
             if ((ArticuloVendido.stock - itemVendido.unidades) < 0)
                 throw new Exception("Error, las unidades a vender son mayores al stock");
+
+            //Resto las unidades vendidas al stock del articulo
             supermercado.inventario.stockArticulos.FirstOrDefault(x => x.articulo.codigoBarra == itemVendido.codigoBarra).
                 stock = ArticuloVendido.stock - itemVendido.unidades;
 
-            //LLeno de datos el nuevo item instanciado
+            //LLeno de datos al nuevo item instanciado
             Item unItem = new Item();
             unItem.unidades = itemVendido.unidades;
             unItem.articulo = ArticuloVendido.articulo;
             unItem.precioSubtotal = itemVendido.unidades * ArticuloVendido.articulo.precio;
 
             //Agrego el item instanciado, a la lista de items
-            supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
-                FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ticket.items.Add(unItem);
+            supermecado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).tickets.
+                FirstOrDefault(x => x.numTicket == itemVendido.numTicket).items.Add(unItem);
+            
+            // supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
+            //     FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ticket.items.Add(unItem);
 
-            //Obtengo el precio total del tiket
-            var itemsVendidos = supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
-                FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ticket;
-            supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
-                FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ticket.precioTotal = itemsVendidos.items.Sum(x => x.precioSubtotal);
+            /*Obtengo el precio total del ticket*/
+            var auxTicket = supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).tickets.
+                FirstOrDefault(x => x.numTicket == itemVendido.numTicket);
 
-            ViewBag.venta = supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja);
+            supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).tickets.
+                FirstOrDefault(x => x.numTicket == itemVendido.numTicket).ticket.precioTotal =
+                auxTicket.items.Sum(x => x.precioSubtotal);
+
+            ViewBag.venta = supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
+                FirstOrDefault(x => x.numTicket == itemVendido.numTicket);
 
             master.Update(supermercado);
 

@@ -6,7 +6,7 @@ namespace Supermercado5719_Biblioteca
     {
         public int id { get; set; }
         public int numCaja { get; set; }
-        public List<Venta> ventas { get; set; }
+        public List<Ticket> tickets { get; set; }
 
         //public Caja()
         //{

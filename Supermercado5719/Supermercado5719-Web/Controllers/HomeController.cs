@@ -14,6 +14,7 @@ namespace Supermercado5719_Web.Controllers
         private readonly LiteDbContext db;
         public HomeController(LiteDbContext db)
         {
+            //Primer insert que se realiza cuando se corre el programa
             this.db = db;
             var master = db.Context.GetCollection<Supermercado>("supermercado");
 

@@ -30,10 +30,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var venta in caja.ventas)
+                        @foreach (var ticket in caja.tickets)
                         {
                         <tr>
-                            <td>@venta.numTicket</td>
+                            <td>@ticket.numTicket</td>
                             <td>
                                 <table class="table table-bordered table-hover table-sm">
                                     <thead>
@@ -44,7 +44,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in venta.ticket.items)
+                                        @foreach (var item in ticket.items)
                                         {
                                         <tr>
                                             <td>@item.articulo.codigoBarra</td>
