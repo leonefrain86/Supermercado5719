@@ -11,11 +11,11 @@ namespace Supermercado5719_Biblioteca
         public Supermercado()
         {
             inventario = new Inventario();
-            cajas = new List<Caja>(){ new Caja { numCaja = 1, ventas = new List<Venta>() },
-                                      new Caja { numCaja = 2, ventas = new List<Venta>() },
-                                      new Caja { numCaja = 3, ventas = new List<Venta>() },
-                                      new Caja { numCaja = 4, ventas = new List<Venta>() },
-                                      new Caja { numCaja = 5, ventas = new List<Venta>() }};
+            cajas = new List<Caja>(){ new Caja { numCaja = 1, tickets = new List<Ticket>() },
+                                      new Caja { numCaja = 2, tickets = new List<Ticket>() },
+                                      new Caja { numCaja = 3, tickets = new List<Ticket>() },
+                                      new Caja { numCaja = 4, tickets = new List<Ticket>() },
+                                      new Caja { numCaja = 5, tickets = new List<Ticket>() }};
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Supermercado5719_Web.Controllers
             //Elimino los ticket con lista de item vacios
             foreach (var caja in supermercado.cajas)
             {
-                caja.tickets.RemoveAll(x => x.ticket.items.Count() == 0);
+                caja.tickets.RemoveAll(x => x.items.Count() == 0);
             }
 
             //Actualizo el db
@@ -50,7 +50,7 @@ namespace Supermercado5719_Web.Controllers
             var supermercado = master.FindAll().FirstOrDefault();
 
             //Incremento el numTicket automaticamente
-            int numAuxTicket = supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets.Count()++;
+            int numAuxTicket = supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets.Count + 1;
 
             //Instancio una nueva lista de ticket
             supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets = 
@@ -60,7 +60,7 @@ namespace Supermercado5719_Web.Controllers
             master.Update(supermercado);
 
             //Guardo el ticket
-            ViewBag.ticket = supermercado.cajas.FirstOrDefault(x => x.numCaja == unaVenta.numCaja).tickets.FirstOrDefault(x => x.numTicket == unTicket.numTicket);
+            ViewBag.ticket = supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets.FirstOrDefault(x => x.numTicket == unTicket.numTicket);
 
             return View("AgregarArticulo");
         }
@@ -104,7 +104,7 @@ namespace Supermercado5719_Web.Controllers
             unItem.precioSubtotal = itemVendido.unidades * ArticuloVendido.articulo.precio;
 
             //Agrego el item instanciado, a la lista de items
-            supermecado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).tickets.
+            supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).tickets.
                 FirstOrDefault(x => x.numTicket == itemVendido.numTicket).items.Add(unItem);
             
             // supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
@@ -115,10 +115,10 @@ namespace Supermercado5719_Web.Controllers
                 FirstOrDefault(x => x.numTicket == itemVendido.numTicket);
 
             supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).tickets.
-                FirstOrDefault(x => x.numTicket == itemVendido.numTicket).ticket.precioTotal =
+                FirstOrDefault(x => x.numTicket == itemVendido.numTicket).precioTotal =
                 auxTicket.items.Sum(x => x.precioSubtotal);
 
-            ViewBag.venta = supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).ventas.
+            ViewBag.venta = supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).tickets.
                 FirstOrDefault(x => x.numTicket == itemVendido.numTicket);
 
             master.Update(supermercado);
