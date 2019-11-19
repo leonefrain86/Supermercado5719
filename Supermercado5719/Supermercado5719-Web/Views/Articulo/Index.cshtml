@@ -1,28 +1,24 @@
 ﻿@model IEnumerable<Supermercado5719_Biblioteca.stockArticulos>
 <div class="row">
     <div class="col-10">
-        <h1 class="display-4">Articulos</h1>
+        <h1 class="text-monospace">Articulos</h1>
     </div>
 </div>
-    <br />
-    <a role="button" asp-controller="Articulo" asp-action="AgregarArticulo" class="btn btn-outline-primary">Agregar</a>
-    <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Carcelar</a>
-    <br />
-    <br />
-    <table class="table table-bordered table-hover table-sm">
-        <thead>
-            <tr>
-                <th>CodigoBarra</th>
-                <th>CodigoInterno</th>
-                <th>Descripcion</th>
-                <th>DescripcionAbreviada</th>
-                <th>Precio</th>
-                <th>Stock</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var stock in Model)
-            {
+
+<table class="table table-bordered table-hover table-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>CodigoBarra</th>
+            <th>CodigoInterno</th>
+            <th>Descripcion</th>
+            <th>DescripcionAbreviada</th>
+            <th>Precio</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stock in Model)
+        {
             <tr>
                 <td>@stock.articulo.codigoBarra </td>
                 <td>@stock.articulo.codigoInterno </td>
@@ -30,11 +26,13 @@
                 <td>@stock.articulo.descripcionAbreviada </td>
                 <td>@stock.articulo.precio</td>
                 <td>@stock.stock</td>
-                @*<td>
-                    <a asp-controller="Articulo" asp-action="Editar" asp-route-id="@stock.articulo.id" class="btn btn-link">Editar</a> |
-                    <a asp-controller="Articulo" asp-action="Eliminar" asp-route-id="@stock.articulo.id" class="btn btn-link">Eliminar</a>
-                </td>*@
             </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
+<br />
+<div class="form-group col-6">
+    <a role="button" asp-controller="Articulo" asp-action="AgregarArticulo" class="btn btn-outline-primary">Agregar</a>
+    <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Carcelar</a>
+</div>
+

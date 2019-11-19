@@ -2,16 +2,16 @@
 @{
     ViewData["Title"] = "Articulo nuevo";
 }
-<h1 class="display-4 mt-5">Agregar Articulo A Venta</h1>
+<h1 class="text-monospace">Vender articulos</h1>
 <form asp-controller="Venta" asp-action="AgregarArticulo" method="post">
     <div class="form-row">
         <div class="form-group col-6">
             <label for="numVenta">codigo de barra: </label>
-            <input asp-for="codigoBarra" type="text" placeholder="codigoBarra" class="form-control " required />
+            <input asp-for="codigoBarra" type="text" placeholder="codigoBarra" class="form-control " value="" required />
         </div>
         <div class="form-group col-6">
             <label for="numCaja">cant. de unidades: </label>
-            <input asp-for="unidades" type="number" placeholder="unidades" class="form-control" required />
+            <input asp-for="unidades" type="number" placeholder="unidades" class="form-control" value="" required />
         </div>
         <div class="form-group col-6">
             <label for="numTicket">Numero de Ticket: </label>
@@ -22,10 +22,12 @@
             <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" value="@ViewBag.ticket.numCaja" readonly />
         </div>
     </div>
+    <br />
     @if(ViewBag.ticket.items.Count > 0)
     {
+    <h1 class="text-monospace">Articulos vendidos</h1>
         <table class="table table-bordered table-hover table-sm">
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th>CodigoBarra</th>
                     <th>Unidades vendidas</th>
@@ -45,8 +47,10 @@
         </table>
     }
 
-    <div class="form-group col-6">
-        <input type="submit" class="btn btn-outline-primary" value="Vender" />
-        <a asp-controller="Venta" asp-action="RealizarVenta" role="button" class="btn btn-outline-secondary">Volver</a>
-    </div>
+        <div class="form-group col-6">
+            <input type="submit" class="btn btn-outline-primary" value="Vender" />
+
+            <a asp-controller="Venta" asp-action="Index" role="button" class="btn btn-outline-secondary">Finalizar venta</a>
+
+        </div>
 </form>

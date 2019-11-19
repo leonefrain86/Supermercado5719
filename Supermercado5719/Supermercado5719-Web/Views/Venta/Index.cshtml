@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Supermercado5719_Biblioteca.Caja>
 <div class="row">
     <div class="col-10">
-        <h1 class="display-4">Ventas</h1>
+        <h1 class="text-monospace">Ventas</h1>
     </div>
 </div>
 <br />
@@ -10,7 +10,7 @@
 <br />
 <br />
 <table class="table table-bordered table-hover table-sm">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th>Numero de caja</th>
             <th>Ventas realizadas</th>
@@ -23,7 +23,7 @@
             <td>@caja.numCaja</td>
             <td>
                 <table class="table table-bordered table-hover table-sm">
-                    <thead>
+                    <thead class="thead-light">
                         <tr>
                             <th>Numero de ticket</th>
                             <th>Articulos vendidos</th>
@@ -36,7 +36,7 @@
                             <td>@ticket.numTicket</td>
                             <td>
                                 <table class="table table-bordered table-hover table-sm">
-                                    <thead>
+                                    <thead class="thead-light">
                                         <tr>
                                             <th>Codigo de barra</th>
                                             <th>Codigo Interno</th>
