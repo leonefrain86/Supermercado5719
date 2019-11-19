@@ -7,7 +7,7 @@
     <div class="form-row">
         <div class="form-group col-6">
             <label for="numVenta">codigo de barra: </label>
-            <input asp-for="codigoBarra" type="text" placeholder="codigoBarra" class="form-control "  required/>
+            <input asp-for="codigoBarra" type="text" placeholder="codigoBarra" class="form-control " required />
         </div>
         <div class="form-group col-6">
             <label for="numCaja">cant. de unidades: </label>
@@ -15,15 +15,37 @@
         </div>
         <div class="form-group col-6">
             <label for="numTicket">Numero de Ticket: </label>
-            <input asp-for="numTicket" type="number" placeholder="numTicket" class="form-control" value="@ViewBag.ticket.numTicket" readonly/>
+            <input asp-for="numTicket" type="number" placeholder="numTicket" class="form-control" value="@ViewBag.ticket.numTicket" readonly />
         </div>
         <div class="form-group col-6">
             <label for="numCaja">Numero de Caja: </label>
-            <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" value="@ViewBag.ticket.numCaja" readonly/>
+            <input asp-for="numCaja" type="number" placeholder="numCaja" class="form-control" value="@ViewBag.ticket.numCaja" readonly />
         </div>
     </div>
-    <div class="form-group col-6">
+    @if(ViewBag.ticket.items.Count > 0)
+    {
+        <table class="table table-bordered table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>CodigoBarra</th>
+                    <th>Unidades vendidas</th>
+                    <th>Precio subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.ticket.items)
+                {
+                <tr>
+                    <td>@item.articulo.codigoBarra</td>
+                    <td>@item.unidades</td>
+                    <td>@item.precioSubtotal</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
 
+    <div class="form-group col-6">
         <input type="submit" class="btn btn-outline-primary" value="Vender" />
         <a asp-controller="Venta" asp-action="RealizarVenta" role="button" class="btn btn-outline-secondary">Volver</a>
     </div>

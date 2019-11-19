@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Supermercado5719_Biblioteca;
 using Supermercado5719_Web.Models;
+using System.Collections.Generic;
 
 namespace Supermercado5719_Web.Controllers
 {
@@ -10,7 +11,7 @@ namespace Supermercado5719_Web.Controllers
         private readonly LiteDbContext db;
         public ArticuloController(LiteDbContext db)
         {
-            this.db = db;
+            this.db = db; 
         }
 
         [HttpGet]

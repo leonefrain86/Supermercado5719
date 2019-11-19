@@ -52,15 +52,20 @@ namespace Supermercado5719_Web.Controllers
             //Incremento el numTicket automaticamente
             int numAuxTicket = supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets.Count + 1;
 
-            //Instancio una nueva lista de ticket
-            supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets = 
-                new List<Ticket>{new Ticket{numTicket = numAuxTicket, numCaja = unTicket.numCaja, items = new List<Item>(), precioTotal = 0}};
 
-            //Actualizo la db
-            master.Update(supermercado);
+            Ticket auxTicket = new Ticket() { numTicket = numAuxTicket, numCaja = unTicket.numCaja, items = new List<Item>(), precioTotal = 0 };
+            //Instancio una nueva lista de ticket
+            supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets.Add(auxTicket);
+
+                //new List<Ticket>{new Ticket{numTicket = numAuxTicket, numCaja = unTicket.numCaja, items = new List<Item>(), precioTotal = 0}};
+
+            
 
             //Guardo el ticket
-            ViewBag.ticket = supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets.FirstOrDefault(x => x.numTicket == unTicket.numTicket);
+            ViewBag.ticket = supermercado.cajas.FirstOrDefault(x => x.numCaja == unTicket.numCaja).tickets.FirstOrDefault(y => y.numTicket == numAuxTicket);
+            
+            //Actualizo la db
+            master.Update(supermercado);
 
             return View("AgregarArticulo");
         }
@@ -118,7 +123,7 @@ namespace Supermercado5719_Web.Controllers
                 FirstOrDefault(x => x.numTicket == itemVendido.numTicket).precioTotal =
                 auxTicket.items.Sum(x => x.precioSubtotal);
 
-            ViewBag.venta = supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).tickets.
+            ViewBag.ticket = supermercado.cajas.FirstOrDefault(x => x.numCaja == itemVendido.numCaja).tickets.
                 FirstOrDefault(x => x.numTicket == itemVendido.numTicket);
 
             master.Update(supermercado);
