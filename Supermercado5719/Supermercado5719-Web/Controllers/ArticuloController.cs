@@ -71,6 +71,7 @@ namespace Supermercado5719_Web.Controllers
 
             return View("EditarArticulo", articulo);
         }
+        
         [HttpPost]
         public IActionResult Editar(Articulo articulo)
         {
